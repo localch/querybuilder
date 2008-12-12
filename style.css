@@ -1,0 +1,341 @@
+body {
+    background-color:#fff;
+    padding:0;
+    font-family:Arial;
+    font-size:12px;
+    margin: 0;
+}
+
+div#container {
+    padding-left: 2em;
+    padding-top: 2.5em;
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+    margin-top: 3em;
+}
+
+form, div.linklist {
+  width: 500px;
+  border: solid 1px #ddd;
+  padding: 20px;
+}
+
+a {
+    color: #22f;
+    cursor: pointer;
+}
+
+h1 {
+  clear: both;
+}
+
+form {
+  clear: both;
+}
+
+th, td {
+  vertical-align: top;
+}
+
+
+div.linklist {
+  margin-bottom: 10px;
+}
+
+div.linklist li {
+    list-style: none;
+    font-size: 14px;
+}
+
+div.linklist li a {
+    color: #44c;
+}
+
+input.field {
+    font-size:13px;
+    width: 40em;
+    margin-right: 1.5em;
+}
+
+textarea.field {
+    width: 40em;
+    height: 10em;
+    line-height: 1.1em;
+}
+
+
+h1 {
+    margin: 0;
+    margin-bottom: 0.2em;
+    color: #444;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+div#navigation {
+    float: left;
+    border: solid 1px #ccc;
+    margin-bottom: 1em;
+    background-color: #F3F3F3;
+    padding: 10px;
+}
+
+div#navigation div.linklist {
+    float: left;
+    width: 200px;
+    background: none;
+    padding: 0;
+    border: none;
+}
+
+div#navigation div.linklist h1 {
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+div#navigation div.linklist ul {
+    margin: 0;
+    padding: 0;
+}
+
+div#navigation div.linklist ul li {
+    font-size: 11px;
+}
+
+input#url {
+    background-color: #efe;
+    margin-top: 1em;
+    border: solid 1px #aa0;
+    font-size: 130%;
+    padding-left: 0.1em;
+    padding-top: 0.1em;
+    width: 99%;
+}
+
+.error, input#url.error {
+    background-color: #fdd;
+}
+
+div#url_message {
+    margin: 0;
+    padding: 0;
+    color: #822;
+    font-weight: bold;
+    padding-bottom: 0.1em;
+    margin-bottom: 1em;
+}
+
+td#optionstd {
+    vertical-align: top;
+    padding-left: 3em;
+}
+
+table#options {
+    font-size: 110%;
+}
+
+table#options tr {
+    pading-top: 0.1em;
+    padding-bottom: 0.1em;
+}
+
+table#options th {
+    text-align: left;
+}
+
+table#options td {
+    padding-left: 2em;
+}
+
+table#options h1, table#options h2, table#options h3, table#options h4 {
+    color: #c22;
+    font-family: Georgia, serif;
+    margin-top: 0.5em;
+    font-weight: bold;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+table#options h1 {
+    font-size: 130%;
+}
+table#options h2 {
+    font-size: 120%;
+}
+table#options h3 {
+    font-size: 110%;
+}
+table#options h4 {
+    font-size: 105%;
+}
+
+tbody#search_parameters tr.small {
+    font-size: 80%;
+    color: #888;
+}
+
+tbody#search_parameters tr.small input {
+    border: inset #888 1px;
+}
+
+tbody#search_parameters th {
+    text-align: left;
+    padding-top: 3px;
+}
+
+tbody#search_parameters td.close a {
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 130%;
+}
+
+
+td#result {
+    width: 70%;
+    min-width: 900px;
+}
+
+iframe#iframe {
+    width: 100%;
+    height: 900px;
+    border: solid 1px #888;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+tr.zebra0 {
+    background-color: #eee;
+}
+tr.zebra1 {
+    background-color: #f8f8f8;
+}
+
+div#documentation {
+    margin-top: 3em;
+}
+
+div#tabs div.yui-content, div#tabs_result div.yui-content {
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+
+div#tabs_result .yui-nav {
+    border: none;
+}
+
+div#tabs_result {
+    margin-top: 1em;
+    vertical-align: bottom;
+}
+
+div#tabs_result .yui-nav em {
+    font-color: #222;
+    line-height: 0.7em;
+}
+
+div#tabs_result .yui-navset .yui-nav .selected a {
+    background: #888;
+}
+
+#host_span {
+    float: right;
+}
+
+img#home {
+    position: absolute;
+    right: 15px;
+    top: 0;
+    z-index: 10;
+    cursor: pointer;
+}
+
+div#servicename {
+    position: absolute;
+    right: 70px;
+    top: 0;
+    z-index: 1;
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #ccc;
+    cursor: pointer;
+}
+
+div#home_screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    alpha(opacity=90); /* ie */ 
+    -moz-opacity: .9; /* mozilla */
+    z-index: 20;
+    margin: 0;
+    padding: 0;
+    display: none;
+}
+
+div#home_screen div.service_description {
+    float: left;
+    width: 13em;
+    height: 13em;
+    z-index: 100;
+    margin: 2em;
+    padding: 1em;
+    background-color: white;
+    border: solid 5px #888;
+    cursor: pointer;
+}
+
+div#home_screen div.service_description h2 {
+    color: #c22;
+    font-family: Georgia, serif;
+    font-size: 150%;
+    float: left;
+    margin: 0;
+}
+
+div#home_screen div.service_description p {
+    float: left;
+    font-weight: bold;
+    margin-top: 0;
+    padding-top: 0;
+    color: #333;
+}
+
+div#home_screen div.service_description ul {
+    padding-left: 1em;
+}
+
+img#loading {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+input#submit {
+    float: right;
+    width: auto;
+    vertical-align: bottom;
+}
+
+#form {
+    border: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+img#reload {
+    float: right;
+    vertical-align: bottom;
+}
+
