@@ -259,16 +259,49 @@ img#home {
     cursor: pointer;
 }
 
-div#servicename {
+div#servicenav {
     position: absolute;
     right: 70px;
     top: 0;
     z-index: 1;
+}
+
+div#servicename {
     font-size: 2.2em;
     font-weight: bold;
     color: #ccc;
     cursor: pointer;
+    float: right;
 }
+
+#similar_services {
+    margin: 0;
+    margin-top: 7px;
+    margin-right: 3em;
+    padding: 0;
+    margin-top: 
+    font-size: 0.8em;
+    color: #888;
+    float: right;
+}
+
+#similar_services ul {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+#similar_services ul li {
+    list-style: none;
+    display: inline;
+    margin-left: 2em;
+}
+
+#similar_services ul li a {
+    color: #66d;
+    font-weight: bold;
+}
+
 
 div#home_screen {
     position: absolute;

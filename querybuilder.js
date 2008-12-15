@@ -133,7 +133,7 @@
         
         ref.updateIframe();
         ref.resizeIframe();
-        ref.addAlwayspresentFields();
+        ref.addDefaultFields();
         ref.updateChooseList();
         ref.updateDocumentation();
         document.title = 'Querybuilder: ' + config[ref.service].name + ' - ' + config[ref.service].commands[ref.command].name;
@@ -147,6 +147,7 @@
         }
         ref.loadHostDropdown();
         ref.loadTabs();
+        ref.updateSimilarServicesList();
         document.getElementById('servicename').innerHTML = config[service].name;
         ref.activateTab(ref.command);
     };
@@ -338,7 +339,7 @@
         document.body.innerHTML = '\n\
     <img src="querybuilder/home.png" id="home" />\n\
     <img src="querybuilder/loading.gif" id="loading" />\n\
-    <div id="servicename"></div>\n\
+    <div id="servicenav"><div id="servicename"></div><div id="similar_services"></div></div>\n\
     <div id="home_screen"></div>\n\
     <div id="container">\n\
       <div id="tabs"></div>\n\
@@ -500,6 +501,37 @@
         document.getElementById('options').innerHTML = html;
     };
 
+    ref.updateSimilarServicesList = function() {
+        var currentServiceName = config[ref.service].name;
+        var ul = document.createElement("ul");
+
+        // need to do this via createFunction, see http://joust.kano.net/weblog/archive/2005/08/08/a-huge-gotcha-with-javascript-closures/
+        var createFunction = function(service) {
+            return function() {
+                ref.onServiceChange(service);
+                ref.resizeIframe();
+            };
+        };
+        
+        for (service in config) {
+            var serviceName = config[service].name;
+            var diff = helper.stringDiff(currentServiceName, serviceName);
+            if (typeof diff != 'undefined') {
+                var li = document.createElement("li");
+                var a = document.createElement("a");
+                a.appendChild(document.createTextNode(diff[1]));
+                a.onclick = createFunction(service);
+                li.appendChild(a);
+                ul.appendChild(li);
+            }
+        }
+        if (ul.childNodes.length > 0) {
+            var div = document.getElementById('similar_services');
+            helper.removeAllChildNodes(div);
+            div.appendChild(ul);
+        }
+    };
+
     ref.updateDocumentation = function() {
         var html = [];
         if (config[ref.service].commands[ref.command].doc_parameters) {
@@ -511,7 +543,7 @@
         document.getElementById('documentation').innerHTML=html.join('<br />');
     };
 
-    ref.addAlwayspresentFields = function() {
+    ref.addDefaultFields = function() {
         if (typeof config[ref.service].commands[ref.command].fields == 'undefined') {
             return;
         }
@@ -519,7 +551,7 @@
         for (fieldname in config[ref.service].commands[ref.command].fields) {
             if (fieldname.substring(0, 1) != '_') {
                 var field = ref.getFieldObject(fieldname);
-                if (field.added == 'alwayspresent' || field.added == 'mustbepresent') {
+                if (field.added == 'start' || field.added == 'mustbepresent') {
                     var input = ref.addField(field, true);
                     if (first) {
                         input.focus();
@@ -726,7 +758,6 @@
                  };
              };
              service_div.onclick = createFunction(service);
-             //YAHOO.util.Event.addListener(service_div, 'click', createFunction(service));
              h.appendChild(service_div);
          }
          h.style.display = 'block';

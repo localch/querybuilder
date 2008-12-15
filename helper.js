@@ -278,10 +278,24 @@
     /**
      * generates a somehow smart String-Difference:
      *
-     * diffString
+     * stringDiff("Query: Guide", "Cockpit: Guide")
+     * returns ["Query", "Cockpit"]
+     * 
+     * stringDiff("Query: Guide", "Query Phonebook")
+     * returns ["Guide", "Phonebook"]
      */
     ref.stringDiff = function(str1, str2) {
-        
+        if (str1 == str2) {
+            return undefined;
+        }
+        var prefixLength = ref.samePrefixLength(str1, str2);
+        if (prefixLength > 3) {
+            return [str1.substring(prefixLength).trim(" .:"), str2.substring(prefixLength).trim(" .:")];
+        }
+        var postfixLength = ref.samePostfixLength(str1, str2);
+        if (postfixLength > 3) {
+            return [str1.slice(0, postfixLength * -1).trim(" .:"), str2.slice(0, postfixLength * -1).trim(" .:")];
+        }
     };
 
     /**
@@ -319,6 +333,16 @@ String.prototype.startsWith = function(str) {
 String.prototype.endsWith = function(str) {
     return (this.match(str+"$")==str);
 };
+/*
+ * " string ".trim(" ")   -> "string"
+ * ".:string:."trim(".:") -> "string"
+ */
+String.prototype.trim = function(trimChars){
+    var regExpStart = new RegExp("^["+trimChars+"]+", "g");
+    var regExpEnd = new RegExp("["+trimChars+"]+$", "g");
+    return (this.replace(regExpStart, "").replace(regExpEnd, ""));
+};
+    
 String.prototype.reverse = function(){
     var splitext = this.split("");
     var revertext = splitext.reverse();
