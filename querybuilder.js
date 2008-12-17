@@ -537,9 +537,12 @@
             }
             
             // Hierarchical information
-            el = ref.createResponseList(response);
-            if (el) {
+            var list = ref.createResponseList(response);
+            if (list.length > 0) {
+                el = document.createElement('div');
                 responseNode.appendChild(el);
+                var tree = new YAHOO.widget.TreeView(el, list);
+                tree.render();
             }
         }
     };
@@ -548,30 +551,47 @@
      * Recursively creates a <ul> for the hierarchical service documentation.
      */
     ref.createResponseList = function(doc) {
-        var ul = null, li = null;
+        var list = [];
+        var child;
+        
         for (child in doc) {
             if (child !== '__desc') {
-                if (ul === null) {
-                    ul = document.createElement('ul');
-                }
-                li = document.createElement('li');
-                li.innerHTML = '<strong class="name">' + child + '</strong> ';
                 if (typeof(doc[child]) === 'object') {
-                    // Process recursively
+                    var el = {
+                        'type': 'HTML',
+                        expanded: true,
+                        children: ref.createResponseList(doc[child])
+                    };
+                    el['html'] = '<strong class="name">' + child + '</strong>';
                     if ('__desc' in doc[child]) {
-                        li.innerHTML += doc[child]['__desc'];
+                        el['html'] += ': <span class="desc">' +
+                            doc[child]['__desc'] + '</span>';
                     }
-                    var subli = ref.createResponseList(doc[child]);
-                    if (subli) {
-                        li.appendChild(subli);
-                    }
+                    list.push(el);
+                } else if (child == '@xmlns') {
+                    // Handle XML namespace specially
+                    var content = '<strong class="name">XML namespace</strong>' +
+                        ': <span class="desc">' + doc[child] + '</span>';
+                    list.push({
+                        'type': 'HTML',
+                        'contentStyle': 'namespace',
+                        'html': content
+                    });
                 } else {
-                    li.innerHTML += doc[child];
+                    var content = '<strong class="name">' + child +
+                        '</strong>: <span class="desc">' + doc[child] +
+                        '</span>';
+                    var cls = (child[0] == '@') ? 'attribute' : 'node';
+                    list.push({
+                        'type': 'HTML',
+                        'contentStyle': cls,
+                        'html': content
+                    });
                 }
-                ul.appendChild(li);
             }
         }
-        return ul;
+        
+        return list;
     };
 
     ref.updateSimilarServicesList = function() {

@@ -384,3 +384,12 @@ img#reload {
     vertical-align: bottom;
 }
 
+
+/* START: Response tree view */
+#response .namespace {
+    color: #ababab;
+}
+#response .attribute strong {
+    font-style: italic;
+}
+/* END: Response tree view */
