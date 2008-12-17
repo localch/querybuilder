@@ -195,6 +195,11 @@ tbody#search_parameters td.close a {
     font-size: 130%;
 }
 
+tbody#search_parameters th, tbody#search_parameters td {
+    padding: 3px;
+    border-bottom: 1px solid #ccc;
+    vertical-align: middle;
+}
 
 td#result {
     width: 70%;
