@@ -60,7 +60,7 @@ one element.
 
 * The key ("live" in the example) will be shown to the user as the name.
 * host: This is the hostname to use in the URL. Can contain parameters in
-  curly brackets which are replaced from the commands "host_args" parameters.
+  curly brackets which are replaced from the commands "host\_args" parameters.
 * applicationname: This is a prefix which gets added as the first part of the
   URL. Useful when a service is mounted on different paths on different hosts.
 
@@ -76,20 +76,20 @@ Each command can contain the following keys:
   be substituted from the field values which the user enters. Do not include
   the leading slash.
 * method: HTTP method to use - either "get" or "post". Defaults to "get".
-* host_args: Dictionary of arguments which are substituted into the host name.
-* url_html: Same as "path" but leads to an HTML view. Alternatively can be a
+* host\_args: Dictionary of arguments which are substituted into the host name.
+* url\_html: Same as "path" but leads to an HTML view. Alternatively can be a
   URL to an XSLT stylesheet prefixed with "xslt:". In that case the service
   request is done and then transformed using the given XSLT.
-* default_view: The view to show by default. Either "xml" or "html". Defaults
+* default\_view: The view to show by default. Either "xml" or "html". Defaults
   to "xml".
 * fields: Dictionary with the configuration of the fields. See "Fields" below.
-* doc_parameters: URL of an external documentation of the request parameters.
-* doc_response: URL of an external documentation of the response format.
+* doc\_parameters: URL of an external documentation of the request parameters.
+* doc\_response: URL of an external documentation of the response format.
 
         commands: {
             websearch: {
                 name: 'Web Search',
-                host_args: { subdomain: 'boss' },
+                host\_args: { subdomain: 'boss' },
                 path: 'ysearch/web/v1/{query}',
                 fields: {
                     ....
@@ -97,8 +97,8 @@ Each command can contain the following keys:
                 responses: {
                     ....
                 },
-                doc_parameters: 'http://developer.yahoo.com/search/boss/boss_guide/univer_api_query.html',
-                doc_response: 'http://developer.yahoo.com/search/boss/boss_guide/ch02s02.html'
+                doc\_parameters: 'http://developer.yahoo.com/search/boss/boss\_guide/univer_api_query.html',
+                doc\_response: 'http://developer.yahoo.com/search/boss/boss\_guide/ch02s02.html'
             }
         }
 
@@ -126,7 +126,7 @@ this possible keys:
             query: {
                 added: 'start',
                 preset: 'Yahoo Test',
-                description: 'The search terms. See <a href="http://developer.yahoo.com/search/boss/boss_guide/univer_api_query.html">Universal BOSS API Arguments</a> for documentation.'
+                description: 'The search terms. See <a href="http://developer.yahoo.com/search/boss/boss\_guide/univer\_api\_query.html">Universal BOSS API Arguments</a> for documentation.'
             },
             start: {
                 description: 'Ordinal position of first result. First position is |0|. Default sets start to 0.'
@@ -148,8 +148,8 @@ The value is a recursive dictionary which defines the XML response structure.
 
 There are a few special keys:
 
-* __desc: Treated as a description of the parent.
-* @* (Any key starting with "@"): Attributes. They are formatted a big
+* \_\_desc: Treated as a description of the parent.
+* @* (Any key starting with "@"): Attributes. They are formatted a bit
   differently in the output.
 * @xmlns: XML namespace. Formatted a bit differently and with special wording.
 * All other keys are treated as XML element names.
@@ -159,17 +159,17 @@ of the key - or a dictionary with the same schema.
 
         responses: {
             200: {
-                '__desc': 'Normal response.',
+                '\_\_desc': 'Normal response.',
                 ysearchresponse: {
                     '@xmlns': 'http://www.inktomi.com/',
                     nextpage: 'Link to paginate to the next page.',
-                    resultset_web: {
+                    resultset\_web: {
                         '@count': 'Number of results on this page.',
                         '@start': 'Ordinal position of the first result.',
                         '@totalhits': 'A result count that reflects no duplicates (the doc argument) and only two results per host (the host 2 argument). The totalhits value is an approximation, and its value may change depending on the requested “start” and “count” values, because the approximation is adjusted as more exact result URLs are processed. A normal use for totalhits is to determine how many pages of results to offer in search result navigation. Since TOTALHITS is an approximation, and the value may change as “start” increases on successive result pages, the result page navigation may need to be adjusted as a user browses result pages.',
                         '@deephits': 'It returns an approximate count that reflects duplicate documents and all documents from a host. deephits, therefore, is invariably equal to or larger than TotalHits. The deephits value is normally used as an information display on a search result page, reporting how many total documents matched the search terms.',
                         result: {
-                            '__desc': 'Repeated for every result.',
+                            '\_\_desc': 'Repeated for every result.',
                             abstract: 'Abstract with keywords highlighted with html tags',
                             title: 'Title with keywords highlighted with html tags',
                             url: 'URL of result',
