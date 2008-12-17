@@ -110,7 +110,9 @@ this possible keys:
   query. "start" means that the field gets added by default but is not
   required. The default is empty.
 * preset: Default value to include when the field is selected.
-* description: Description of the field. Can contain HTML.
+* description: Description of the field. Can contain HTML. Additionally
+  possible values can be embedded within pipes. That will make them clickable
+  so it directly puts the value into the text field.
 
         fields: {
             appid: {
@@ -124,6 +126,11 @@ this possible keys:
                 description: 'The search terms. See <a href="http://developer.yahoo.com/search/boss/boss_guide/univer_api_query.html">Universal BOSS API Arguments</a> for documentation.'
             },
             start: {
-                description: 'Ordinal position of first result. First position is 0. Default sets start to 0.'
+                description: 'Ordinal position of first result. First position is |0|. Default sets start to 0.'
+            }
+            format: {
+                added: 'start',
+                preset: 'xml',
+                description: 'The data format of the response. Value can be set to either "|xml|" or "|json|". Default sets format to "json".'},
             }
         }
