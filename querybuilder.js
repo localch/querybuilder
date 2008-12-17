@@ -34,23 +34,26 @@
         baseUrl = 'http://' + baseUrl.replace('//', '/');
         var inputs = YAHOO.util.Dom.getElementsByClassName('field', '', document.getElementById('search_parameters'));
         var params = {};
+        var encodedParams = {};
         var getParams = {};
         for (var i=0; i<inputs.length; i++) {
             var input = inputs[i];
-            params[input.name] = input.value;
             var value;
             if (input.tagName.toLowerCase() == 'textarea') {
                 value = input.innerHTML;
             } else {
                 value = input.value;
             }
+            var encodedValue = encodeURIComponent(value);
+            params[input.name] = value;
+            encodedParams[input.name] = encodedValue;
             // just include fields in the get-parameters, that are not part of the url, e.g. exclude 'slot' when url='{slot}/comments'
             if (input.value != '' && baseUrl.indexOf('{' + input.name + '}') == -1) {
-                getParams[input.name] = input.value;
+                getParams[input.name] = encodedValue;
             }
         }
 
-        var url = YAHOO.lang.substitute(baseUrl, params);
+        var url = YAHOO.lang.substitute(baseUrl, encodedParams);
         var params_string = '';
 	    if (!ref.isPost()) {
             params_string = helper.object2str(getParams);
