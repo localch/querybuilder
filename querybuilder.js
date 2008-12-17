@@ -724,7 +724,8 @@
             if (input.type == 'textarea') {
                 input.innerHTML = field.preset;
                 // line-height is 1.1em so we need to multiply by 1.1
-                input.style.height = (field.preset.split("\n").length * 1.1) + 'em';
+                var lines = Math.max(field.preset.split("\n").length, 10);
+                input.style.height = (lines * 1.1) + 'em';
             } else {
                 input.value = field.preset;
             }
