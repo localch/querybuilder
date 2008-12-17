@@ -152,7 +152,8 @@ table#options td {
     padding-left: 2em;
 }
 
-table#options h1, table#options h2, table#options h3, table#options h4, #response h2 {
+table#options h1, table#options h2, table#options h3, table#options h4,
+#response h2, #response h2 a {
     color: #c22;
     font-family: Georgia, serif;
     margin-top: 0.5em;
