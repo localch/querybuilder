@@ -622,7 +622,7 @@
         }
         var tdEx = document.createElement('td');
         // replacing the |value| with a link that adds that value to the field
-        tdEx.innerHTML = field.description.replace(/\|([a-zA-Z0-9_]+)\|/g, '<a href="javascript:void(0)" onclick="YAHOO.lcl.querybuilder.setInputfieldValue(\'f_'+field.name+'\', \'$1\')">$1</a>');
+        tdEx.innerHTML = field.description.replace(/\|([a-zA-Z0-9_]+)\|/g, '<a href="javascript:void(0)" class="value" onclick="YAHOO.lcl.querybuilder.setInputfieldValue(\'f_'+field.name+'\', \'$1\')">$1</a>');
         tr.appendChild(tdEx);
         document.getElementById('search_parameters').appendChild(tr);
         if (fromChooseList) {

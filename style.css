@@ -201,6 +201,14 @@ tbody#search_parameters th, tbody#search_parameters td {
     vertical-align: middle;
 }
 
+a.value {
+    border-bottom: 1px dotted #000;
+    text-decoration: none;
+}
+a.value:hover {
+    border-bottom-style: solid;
+}
+
 td#result {
     width: 70%;
     min-width: 900px;
