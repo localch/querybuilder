@@ -57,7 +57,6 @@ div.linklist li a {
 input.field {
     font-size:13px;
     width: 40em;
-    margin-right: 1.5em;
 }
 
 textarea.field {
@@ -198,8 +197,22 @@ tbody#search_parameters td.close a {
 
 tbody#search_parameters th, tbody#search_parameters td {
     padding: 3px;
-    border-bottom: 1px solid #ccc;
     vertical-align: middle;
+}
+
+tbody#search_parameters td.description {
+	background: transparent url(tip.gif) no-repeat center left;
+}
+
+tbody#search_parameters td.description p {
+    margin: 0;
+    padding: 0;
+    margin-left: 2px;
+    border: solid 1px #eee;
+    border-left: solid 1px #ddd;
+    padding: 3px;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
 a.value {

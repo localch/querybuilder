@@ -745,11 +745,16 @@
         if (typeof field.onchange != 'undefined') {
             field.onchange(input);
         }
-        var tdEx = document.createElement('td');
-        // replacing the |value| with a link that adds that value to the field
-        tdEx.innerHTML = field.description.replace(/\|([a-zA-Z0-9_]+)\|/g, '<a href="javascript:void(0)" class="value" onclick="YAHOO.lcl.querybuilder.setInputfieldValue(\'f_'+field.name+'\', \'$1\')">$1</a>');
-        tr.appendChild(tdEx);
-        document.getElementById('search_parameters').appendChild(tr);
+        if (typeof field.description != undefined && field.description != '') {
+            var tdEx = document.createElement('td');
+            var p = document.createElement('p');
+            // replacing the |value| with a link that adds that value to the field
+            p.innerHTML = field.description.replace(/\|([a-zA-Z0-9_]+)\|/g, '<a href="javascript:void(0)" class="value" onclick="YAHOO.lcl.querybuilder.setInputfieldValue(\'f_'+field.name+'\', \'$1\')">$1</a>');
+            tdEx.className = 'description';
+            tdEx.appendChild(p);
+            tr.appendChild(tdEx);
+        }
+        Dom.get('search_parameters').appendChild(tr);
         if (fromChooseList) {
             ref.updateIframe();
             ref.updateChooseList();
