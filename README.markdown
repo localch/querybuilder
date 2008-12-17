@@ -116,6 +116,7 @@ this possible keys:
 * description: Description of the field. Can contain HTML. Additionally
   possible values can be embedded within pipes. That will make them clickable
   so it directly puts the value into the text field.
+* type: Set type "textarea" to get a textarea field.
 
         fields: {
             appid: {
