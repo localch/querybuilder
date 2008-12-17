@@ -141,10 +141,13 @@ this possible keys:
 #### Responses
 
 The responses are defined as a dictionary. The keys describe the different
-versions - HTTP response codes are recommended. The value is a recursive
-dictionary which defines the XML response structure.
+versions - HTTP response codes are recommended. If you use HTTP response
+codes, they are linked to the respective section of the official HTTP RFC.
+
+The value is a recursive dictionary which defines the XML response structure.
 
 There are a few special keys:
+
 * __desc: Treated as a description of the parent.
 * @* (Any key starting with "@"): Attributes. They are formatted a big
   differently in the output.
