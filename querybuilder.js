@@ -555,7 +555,8 @@
     };
     
     /**
-     * Recursively creates a <ul> for the hierarchical service documentation.
+     * Recursively creates a dictionary for the TreeView construction of the
+     * response documentation.
      */
     ref.createResponseList = function(doc) {
         var list = [];
