@@ -545,6 +545,9 @@
                 tree.render();
             }
         }
+        if (ref.tabOptionsResponse === null || typeof(ref.tabOptionsResponse) === 'undefined') {
+            ref.tabOptionsResponse = ref.createOptionsResponseTab();
+        }
     };
     
     /**
@@ -593,6 +596,21 @@
         
         return list;
     };
+    
+    ref.createOptionsResponseTab = function() {
+        console.debug("createOptionsResponseTab");
+        var cont = document.createElement('div');
+        Dom.get('optionstd').insertBefore(cont, Dom.get('options'));
+        Dom.addClass(cont, 'optionsresponse');
+        var tabs = new YAHOO.widget.TabView(cont);
+        tabs.addTab(new YAHOO.widget.Tab({
+            label: 'Request', active: true, 'contentEl': Dom.get('options')
+        }));
+        tabs.addTab(new YAHOO.widget.Tab({
+            label: 'Response', 'contentEl': Dom.get('response')
+        }));
+        return tabs;
+    }
 
     ref.updateSimilarServicesList = function() {
         var currentServiceName = config[ref.service].name;
