@@ -235,7 +235,8 @@ div#documentation {
     margin-top: 3em;
 }
 
-div#tabs div.yui-content, div#tabs_result div.yui-content {
+div#tabs div.yui-content, div#tabs_result div.yui-content,
+#optionstd div.yui-content {
     border: none;
     background: none;
     padding: 0;
@@ -251,13 +252,18 @@ div#tabs_result {
     vertical-align: bottom;
 }
 
-div#tabs_result .yui-nav em {
+div#tabs_result .yui-nav em,
+#optionstd .yui-nav em {
     font-color: #222;
     line-height: 0.7em;
 }
 
-div#tabs_result .yui-navset .yui-nav .selected a {
+div#tabs_result .yui-navset .yui-nav .selected a,
+#optionstd .yui-navset .yui-nav .selected a {
     background: #888;
+}
+#optionstd .yui-navset .yui-nav {
+    border-bottom-width: 3px;
 }
 
 #host_span {
