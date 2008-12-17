@@ -26,7 +26,9 @@ config.yahoo_boss = {
                 callback: {description: 'The name of the callback function to wrap the result. Parameter is valid only if format is set to "json". No default value exists.'},
                 sites: {description: 'Restrict BOSS search results to a set of pre-defined sites. Multiple sites must be comma separated. Example: (sites=abc.com,cnn.com). The Images service does not yet support multiple sites. Note: This argument can use a single site parameter.'},
                 view: {description: 'Introducing View! Retrieve additional search data provided by the respective BOSS service. In the current version only view=keyterms is offered via the BOSS Web Search service. More views for more BOSS services coming soon.'}
-            }
+            },
+            doc_parameters: 'http://developer.yahoo.com/search/boss/boss_guide/univer_api_query.html',
+            doc_response: 'http://developer.yahoo.com/search/boss/boss_guide/ch02s02.html'
         }
     }
 };
