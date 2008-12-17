@@ -1,6 +1,7 @@
 (function() {
     var ref = YAHOO.namespace('lcl.querybuilder');
     var helper = YAHOO.lcl.helper;
+    var Dom = YAHOO.util.Dom;
      
     ref.captureFieldTyping = function() {
         clearTimeout(this.fieldTypingTimeout);
@@ -138,6 +139,7 @@
         ref.resizeIframe();
         ref.addDefaultFields();
         ref.updateChooseList();
+        ref.updateResponseDocs();
         ref.updateDocumentation();
         document.title = 'Querybuilder: ' + config[ref.service].name + ' - ' + config[ref.service].commands[ref.command].name;
         document.location.hash = '#' + ref.service + "." + ref.command;
@@ -306,6 +308,7 @@
                     document.getElementById('f_' + param).value = unescape(params[param]);
                 }
                 ref.updateChooseList();
+                ref.updateResponseDocs();
                 ref.resizeIframe();
                 if (!hasInvalidFields) {
                     ref.urlFieldValid();
@@ -366,6 +369,7 @@
           </td>\n\
           <td id="optionstd">\n\
             <table id="options"></table>\n\
+            <div id="response"></div>\n\
             <div id="documentation"></div>\n\
           </td>\n\
         </tr>\n\
@@ -502,6 +506,72 @@
             document.getElementById('result').style.width = '70%';
         }
         document.getElementById('options').innerHTML = html;
+    };
+    
+    /**
+     * Update the documentation of the response.
+     */
+    ref.updateResponseDocs = function() {
+        var service = config[ref.service];
+        var command = config[ref.service].commands[ref.command];
+        var responseNode = Dom.get('response');
+        responseNode.innerHTML = '';
+        if (!('responses' in command)) {
+            return;
+        }
+        var responses = command.responses;
+        for (response_code in responses) {
+            var response = responses[response_code];
+            // Response code title
+            var el = document.createElement('h2');
+            el.innerHTML = response_code;
+            responseNode.appendChild(el);
+            
+            // Description of the code
+            if ('__desc' in response) {
+                var el = document.createElement('p');
+                el.innerHTML = response['__desc'];
+                responseNode.appendChild(el);
+                Dom.addClass(el, 'description');
+                Dom.addClass(el, 'code_description');
+            }
+            
+            // Hierarchical information
+            el = ref.createResponseList(response);
+            if (el) {
+                responseNode.appendChild(el);
+            }
+        }
+    };
+    
+    /**
+     * Recursively creates a <ul> for the hierarchical service documentation.
+     */
+    ref.createResponseList = function(doc) {
+        var ul = null, li = null;
+        for (child in doc) {
+            if (child !== '__desc') {
+                if (ul === null) {
+                    ul = document.createElement('ul');
+                }
+                li = document.createElement('li');
+                li.innerHTML = '<strong class="name">' + child + '</strong> ';
+                if (typeof(doc[child]) === 'object') {
+                    // Process recursively
+                    if ('__desc' in doc[child]) {
+                        li.innerHTML += doc[child]['__desc'];
+                    }
+                    var subli = ref.createResponseList(doc[child]);
+                    if (subli) {
+                        li.appendChild(subli);
+                    }
+                } else {
+                    li.innerHTML += doc[child];
+                }
+                ul.appendChild(li);
+            }
+        }
+        return ul;
     };
 
     ref.updateSimilarServicesList = function() {
