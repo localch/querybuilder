@@ -503,7 +503,7 @@
         if (i == 1) {
             document.getElementById('result').style.width = '100%';
         } else {
-            document.getElementById('result').style.width = '70%';
+            document.getElementById('result').style.width = '60%';
         }
         document.getElementById('options').innerHTML = html;
     };
