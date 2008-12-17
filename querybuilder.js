@@ -517,6 +517,10 @@
         var responseNode = Dom.get('response');
         responseNode.innerHTML = '';
         if (!('responses' in command)) {
+            if (ref.tabOptionsResponse !== null && typeof(ref.tabOptionsResponse) !== 'undefined') {
+                // There was a response documentation in a previous command
+                responseNode.innerHTML = "This command doesn't have any response documentation.";
+            }
             return;
         }
         var responses = command.responses;
