@@ -524,11 +524,23 @@
             return;
         }
         var responses = command.responses;
-        for (response_code in responses) {
-            var response = responses[response_code];
+        for (response_type in responses) {
+            response_type = new String(response_type)
+            var response = responses[response_type];
             // Response code title
             var el = document.createElement('h2');
-            el.innerHTML = response_code;
+            if (response_type.length === 3 && parseInt(response_type, 10) !== NaN) {
+                // Assume HTTP code
+                // Need to calculate the section. Give me a better linkable
+                // spec and I'll use it
+                var chapter = response_type[0];
+                var section = parseInt(response_type.substr(1), 10) + 1;
+                var link = 'http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html' +
+                    '#sec10.' + chapter + '.' + section;
+                el.innerHTML = '<a href="'+link+'">' + response_type + '</a>';
+            } else {
+                el.innerHTML = response_type;
+            }
             responseNode.appendChild(el);
             
             // Description of the code
