@@ -478,7 +478,8 @@
 
 
     ref.updateChooseList = function() {
-        var html = '';
+        var table = Dom.get('options');
+        helper.removeAllChildNodes(table);
         
         var present_fields = [];
         var inputs = YAHOO.util.Dom.getElementsByClassName('field', '', document.getElementById('search_parameters'));
@@ -488,14 +489,46 @@
         
         i = 1;
         for (fieldname in config[ref.service].commands[ref.command].fields) {
+            var tr = document.createElement('tr');
             if (fieldname.substring(0,1) == '_') {
-                html += '<h2>' + config[ref.service].commands[ref.command].fields[fieldname] + '</h2>';
+                var h2 = document.createElement('h2');
+                h2.appendChild(document.createTextNode(config[ref.service].commands[ref.command].fields[fieldname]));
+                var td = document.createElement('td');
+                td.setAttribute("colspan", 2);
+                td.appendChild(h2);
+                tr.appendChild(td);
+                table.appendChild(tr);
+                i = 1;
             } else {
                 var field = ref.getFieldObject(fieldname);
                 
                 // don't show fields in choose-list that are already chosen
                 if (!(field.name in helper.objectConverter(present_fields))) {
-                    html +=  '<tr class="zebra' + (i % 2) + '"><th><label><a href="javascript:void(0)" onclick="javascript:YAHOO.lcl.querybuilder.addFieldByName(\''+field.name+'\', true)">'+field.name+'</a></label></th><td>'+field.description.replace(/\|/g, "")+'</td></tr>';
+                    // need to do this via createFunction, see http://joust.kano.net/weblog/archive/2005/08/08/a-huge-gotcha-with-javascript-closures/
+                    var createFunction = function(fieldname) {
+                        return function() {
+                            YAHOO.lcl.querybuilder.addFieldByName(fieldname, true);
+                        };
+                    };
+                    
+                    var th = document.createElement('th');
+                    tr.className = 'option zebra' + (i % 2);
+                    var label = document.createElement('label');
+                    label.onclick = createFunction(field.name);
+                    label.appendChild(document.createTextNode(field.name));
+                    th.appendChild(label);
+                    tr.appendChild(th);
+                    var td = document.createElement('td');
+                    
+                    // just show first sentence of the description
+                    var description = field.description.replace(/\|/g, "").replace(/e\.g\./g, "e․g․"); // replace points abbrevs so they don't count as sentence-delimiter
+                    description = description.split('. ')[0];
+                    td.innerHTML = description;
+                    td.onclick = createFunction(field.name);
+                    tr.appendChild(td);
+                    table.appendChild(tr);
+                    
+                    //html +=  '<tr class="zebra' + (i % 2) + '"><th><label><a href="javascript:void(0)" onclick="javascript:YAHOO.lcl.querybuilder.addFieldByName(\''+field.name+'\', true)">'+field.name+'</a></label></th><td>'+description+'</td></tr>';
                 }
                 i++;
             }
@@ -503,9 +536,9 @@
         if (i == 1) {
             document.getElementById('result').style.width = '100%';
         } else {
-            document.getElementById('result').style.width = '60%';
+            document.getElementById('result').style.width = '70%';
         }
-        document.getElementById('options').innerHTML = html;
+        //document.getElementById('options').innerHTML = html;
     };
     
     /**
@@ -525,7 +558,7 @@
         }
         var responses = command.responses;
         for (response_type in responses) {
-            response_type = new String(response_type)
+            response_type = new String(response_type);
             var response = responses[response_type];
             // Response code title
             var el = document.createElement('h2');
@@ -627,7 +660,7 @@
             label: 'Response', 'contentEl': Dom.get('response')
         }));
         return tabs;
-    }
+    };
 
     ref.updateSimilarServicesList = function() {
         var currentServiceName = config[ref.service].name;

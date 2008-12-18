@@ -146,10 +146,23 @@ table#options tr {
 table#options th {
     text-align: left;
 }
-
-table#options td {
-    padding-left: 2em;
+table#options th label {
+    color: #22d;
+    cursor: pointer;
 }
+
+table#options tr.option td {
+    padding-left: 2em;
+    cursor: pointer;
+}
+
+table#options tr.zebra0 {
+    background-color: #f8f8f8;
+}
+table#options tr.zebra1 {
+    background-color: #fff;
+}
+
 
 table#options h1, table#options h2, table#options h3, table#options h4,
 #response h2, #response h2 a {
@@ -236,13 +249,6 @@ iframe#iframe {
 
 table {
     border-collapse: collapse;
-}
-
-tr.zebra0 {
-    background-color: #eee;
-}
-tr.zebra1 {
-    background-color: #f8f8f8;
 }
 
 div#documentation {
