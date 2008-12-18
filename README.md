@@ -89,7 +89,7 @@ Each command can contain the following keys:
         commands: {
             websearch: {
                 name: 'Web Search',
-                host\_args: { subdomain: 'boss' },
+                host_args: { subdomain: 'boss' },
                 path: 'ysearch/web/v1/{query}',
                 fields: {
                     ....
@@ -97,8 +97,8 @@ Each command can contain the following keys:
                 responses: {
                     ....
                 },
-                doc\_parameters: 'http://developer.yahoo.com/search/boss/boss\_guide/univer_api_query.html',
-                doc\_response: 'http://developer.yahoo.com/search/boss/boss\_guide/ch02s02.html'
+                doc_parameters: 'http://developer.yahoo.com/search/boss/boss_guide/univer_api_query.html',
+                doc_response: 'http://developer.yahoo.com/search/boss/boss_guide/ch02s02.html'
             }
         }
 
@@ -127,7 +127,7 @@ this possible keys:
             query: {
                 added: 'start',
                 preset: 'Yahoo Test',
-                description: 'The search terms. See <a href="http://developer.yahoo.com/search/boss/boss\_guide/univer\_api\_query.html">Universal BOSS API Arguments</a> for documentation.'
+                description: 'The search terms. See <a href="http://developer.yahoo.com/search/boss/boss_guide/univer_api_query.html">Universal BOSS API Arguments</a> for documentation.'
             },
             start: {
                 description: 'Ordinal position of first result. First position is |0|. Default sets start to 0.'
@@ -160,17 +160,17 @@ of the key - or a dictionary with the same schema.
 
         responses: {
             200: {
-                '\_\_desc': 'Normal response.',
+                '__desc': 'Normal response.',
                 ysearchresponse: {
                     '@xmlns': 'http://www.inktomi.com/',
                     nextpage: 'Link to paginate to the next page.',
-                    resultset\_web: {
+                    resultset_web: {
                         '@count': 'Number of results on this page.',
                         '@start': 'Ordinal position of the first result.',
                         '@totalhits': 'A result count that reflects no duplicates (the doc argument) and only two results per host (the host 2 argument). The totalhits value is an approximation, and its value may change depending on the requested “start” and “count” values, because the approximation is adjusted as more exact result URLs are processed. A normal use for totalhits is to determine how many pages of results to offer in search result navigation. Since TOTALHITS is an approximation, and the value may change as “start” increases on successive result pages, the result page navigation may need to be adjusted as a user browses result pages.',
                         '@deephits': 'It returns an approximate count that reflects duplicate documents and all documents from a host. deephits, therefore, is invariably equal to or larger than TotalHits. The deephits value is normally used as an information display on a search result page, reporting how many total documents matched the search terms.',
                         result: {
-                            '\_\_desc': 'Repeated for every result.',
+                            '__desc': 'Repeated for every result.',
                             abstract: 'Abstract with keywords highlighted with html tags',
                             title: 'Title with keywords highlighted with html tags',
                             url: 'URL of result',
